@@ -40,7 +40,7 @@ header = {}
 
 
 query = {
-    'object-name': 'Test Object'
+    'object-name': 'Test Object1'
 }
 endpoint = '/networks/'+network_id+'/objects/test-object'
 response = requests.request('PUT', base + endpoint, params=query, headers=header, timeout=120 )
