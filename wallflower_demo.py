@@ -34,7 +34,7 @@ import random
 import time
 import datetime
 
-base = 'http://13.92.90.127:8000'
+base = 'http://127.0.0.1:8000'
 network_id = 'local'
 header = {}
 
