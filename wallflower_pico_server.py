@@ -34,6 +34,7 @@ import json
 
 from flask import Flask, request, jsonify, make_response, send_from_directory, render_template, g
 from wallflower_pico_db import WallflowerDB
+from synctoclient import synctoclient_object, synctoclient_stream, synctoclient_point
 
 #import re
 import datetime
@@ -167,6 +168,9 @@ def objects(object_id):
 
         pico_db.do(object_request,'create','object',(config['network-id'],object_id),at)
         response.update( pico_db.db_message )
+        #added code say-watt-project
+        synctoclient_object('PUT', object_id, object_id)
+        #end added
 
         # Broadcast response over websocket
         if config['enable_ws'] and response['object-code'] == 201:
@@ -185,6 +189,10 @@ def objects(object_id):
         pico_db.do(object_request,'update','object',(config['network-id'],object_id),at)
         response.update( pico_db.db_message )
 
+        #added code say-watt-project
+        synctoclient_object('POST', object_id, object_name)
+        #end added
+
         # Broadcast response over websocket
         if config['enable_ws'] and response['object-code'] == 200:
             response['response-type'] = 'object-update'
@@ -194,6 +202,10 @@ def objects(object_id):
         # Delete Object
         pico_db.do(object_request,'delete','object',(config['network-id'],object_id),at)
         response.update( pico_db.db_message )
+
+        #added code say-watt-project
+        synctoclient_object('DELETE', object_id, object_id)
+        #end added
 
         if config['enable_ws'] and response['object-code'] == 200:
             response['response-type'] = 'object-delete'
