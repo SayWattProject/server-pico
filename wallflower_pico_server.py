@@ -258,6 +258,10 @@ def streams(object_id,stream_id):
         pico_db.do(stream_request,'create','stream',(config['network-id'],object_id,stream_id),at)
         response.update( pico_db.db_message )
 
+        #added code say-watt-project
+        synctoclient_stream('PUT', object_id, stream_id, stream_id, points_type)
+        #end added
+
         if config['enable_ws'] and response['stream-code'] == 201:
             response['response-type'] = 'stream-create'
             factory.broadcast( json.dumps(response) )
@@ -274,6 +278,10 @@ def streams(object_id,stream_id):
         pico_db.do(stream_request,'update','stream',(config['network-id'],object_id,stream_id),at)
         response.update( pico_db.db_message )
 
+        #added code say-watt-project
+        synctoclient_stream('POST', object_id, stream_id, stream_name, points_type)
+        #end added
+
         if config['enable_ws'] and response['stream-code'] == 200:
             response['response-type'] = 'stream-update'
             factory.broadcast( json.dumps(response) )
@@ -282,6 +290,10 @@ def streams(object_id,stream_id):
         # Delete Object
         pico_db.do(stream_request,'delete','stream',(config['network-id'],object_id,stream_id),at)
         response.update( pico_db.db_message )
+
+        #added code say-watt-project
+        synctoclient_stream('DELETE', object_id, stream_id, stream_id, None)
+        #end added
 
         if config['enable_ws'] and response['stream-code'] == 200:
             response['response-type'] = 'stream-delete'
@@ -361,6 +373,10 @@ def points(object_id,stream_id):
 
         pico_db.do(points_request,'update','points',(config['network-id'],object_id,stream_id),at)
         response.update( pico_db.db_message )
+
+        #say-watt
+        synctoclient_point('POST', object_id, stream_id, point_value,point_at)
+        #end added
 
         if config['enable_ws'] and response['points-code'] == 200:
             response['response-type'] = 'points-update'

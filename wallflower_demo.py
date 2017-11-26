@@ -34,16 +34,18 @@ import random
 import time
 import datetime
 
-base = 'http://127.0.0.1:8000'
+base = 'http://13.92.90.127:8000'
 network_id = 'local'
 header = {}
 
 
 query = {
-    'object-name': 'Test Object1'
+    'object-name': 'Test Object11'
 }
-endpoint = '/networks/'+network_id+'/objects/test-object'
+endpoint = '/networks/'+network_id+'/objects/test-object11'
 response = requests.request('PUT', base + endpoint, params=query, headers=header, timeout=120 )
+print('Response:')
+print(response)
 resp = json.loads( response.text )
 if resp['object-code'] == 201:
     print('Create object test-object: ok')
@@ -55,7 +57,7 @@ query = {
     'stream-name': 'Test Stream',
     'points-type': 'i' # 'i', 'f', or 's'
 }
-endpoint = '/networks/'+network_id+'/objects/test-object/streams/test-stream'
+endpoint = '/networks/'+network_id+'/objects/test-object11/streams/test-stream'
 response = requests.request('PUT', base + endpoint, params=query, headers=header, timeout=120 )
 resp = json.loads( response.text )
 if resp['stream-code'] == 201:
@@ -66,7 +68,7 @@ else:
 
 
 print("Start sending random points (Ctrl+C to stop)")
-endpoint = '/networks/local/objects/test-object/streams/test-stream/points'
+endpoint = '/networks/local/objects/test-object11/streams/test-stream/points'
 while True:
     query = {
         'points-value': random.randint(0, 10),
