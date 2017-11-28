@@ -5,7 +5,7 @@ import time
 import datetime
 
 def localPutObject(object_id, object_name):
-    base = 'http://13.92.90.127:5000'
+    base = 'http://0.0.0.0:5000'
     #base = 'http://13.92.90.127:8000'
     network_id = 'local'
     header = {}
