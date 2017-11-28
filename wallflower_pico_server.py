@@ -34,7 +34,7 @@ import json
 
 from flask import Flask, request, jsonify, make_response, send_from_directory, render_template, g
 from wallflower_pico_db import WallflowerDB
-# from synctoclient import synctoclient_object, synctoclient_stream, synctoclient_point
+from synctoclient import synctoclient_object, synctoclient_stream, synctoclient_point
 
 #import re
 import datetime
